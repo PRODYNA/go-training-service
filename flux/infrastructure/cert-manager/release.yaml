@@ -20,6 +20,6 @@ spec:
     prometheus:
       servicemonitor:
         enabled: true
-        prometheusInstance: prometheus
+        prometheusInstance: monitoring
         labels:
-          release: prometheus
+          release: monitoring
