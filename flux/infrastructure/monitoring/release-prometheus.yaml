@@ -684,7 +684,7 @@ spec:
         # hosts:
         #   - grafana.domain.com
         hosts: 
-          - "grafana..20.71.73.61.nip.io"
+          - "grafana.20.71.73.61.nip.io"
     
         ## Path for grafana ingress
         path: /
