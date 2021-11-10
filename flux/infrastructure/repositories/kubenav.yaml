@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: kubenav
+spec:
+  interval: 1440m
+  url: https://kubenav.github.io/helm-repository

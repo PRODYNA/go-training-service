@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: groundhog2k
+spec:
+  interval: 1440m
+  url: https://groundhog2k.github.io/helm-charts/

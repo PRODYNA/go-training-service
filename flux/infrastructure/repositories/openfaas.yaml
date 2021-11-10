@@ -1,0 +1,7 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: openfaas
+spec:
+  interval: 1440m
+  url: https://openfaas.github.io/faas-netes/
