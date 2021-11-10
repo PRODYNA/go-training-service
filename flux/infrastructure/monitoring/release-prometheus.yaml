@@ -756,20 +756,9 @@ spec:
             url: https://grafana.com/api/dashboards/14055/revisions/1/download
             datasource: Prometheus
             folder: Extra
-          pfsense:
-            url: https://grafana.com/api/dashboards/12023/revisions/1/download
-            datasource: Influx
             folder: Extra
           nginx-ingress:
             url: https://grafana.com/api/dashboards/10187/revisions/1/download
-            datasource: Prometheus
-            folder: Extra
-          ceph:
-            url: https://grafana.com/api/dashboards/9550/revisions/1/download
-            datasource: Prometheus
-            folder: Extra
-          ceph2:
-            url: https://grafana.com/api/dashboards/7050/revisions/1/download
             datasource: Prometheus
             folder: Extra
           flux:
