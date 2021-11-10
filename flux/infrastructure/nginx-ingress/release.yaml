@@ -19,9 +19,9 @@ spec:
   values:
     controller:
       metrics:
-        enabled: false
+        enabled: true
         serviceMonitor:
-          enabled: false
+          enabled: true
           additionalLabels:
             release: monitoring
       watchIngressWithoutClass: true

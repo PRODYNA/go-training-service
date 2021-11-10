@@ -19,7 +19,7 @@ spec:
     installCRDs: true
     prometheus:
       servicemonitor:
-        enabled: false
+        enabled: true
         prometheusInstance: kube-prometheus-stack
         labels:
           release: kube-prometheus-stack
