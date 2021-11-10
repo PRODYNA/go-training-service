@@ -16,3 +16,7 @@ spec:
             name: go-service
             port:
               number: 8080
+  tls:
+  - hosts:
+    - "fratschi.20.71.73.61.nip.io"
+    secretName: ingress-tls
