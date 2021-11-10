@@ -4,5 +4,5 @@ namespace: monitoring
 resources:
   - namespace.yaml
   - release-prometheus.yaml
-#  - release-loki.yaml
+  - release-loki.yaml
 #  - podmonitor-flux.yaml
