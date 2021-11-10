@@ -5,4 +5,4 @@ resources:
   - namespace.yaml
   - release-prometheus.yaml
   - release-loki.yaml
-#  - podmonitor-flux.yaml
+  - podmonitor-flux.yaml
