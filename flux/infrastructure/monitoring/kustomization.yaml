@@ -3,6 +3,6 @@ kind: Kustomization
 namespace: monitoring
 resources:
   - namespace.yaml
-  - release-prometheus.yaml
+#  - release-prometheus.yaml
   - release-loki.yaml
 #  - podmonitor-flux.yaml
