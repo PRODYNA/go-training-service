@@ -8,12 +8,11 @@ spec:
   rules:
   - host: "fratschi.20.71.73.61.nip.io"
     http:
-    - http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: go-service
-                port:
-                  number: 8080
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: go-service
+              port:
+                number: 8080
