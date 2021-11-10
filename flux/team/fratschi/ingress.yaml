@@ -6,9 +6,11 @@ metadata:
     nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   rules:
+  - host: "fratschi.20.71.73.61.nip.io"
+    http:
     - http:
         paths:
-          - path: /fratschi(/|$)(.*)
+          - path: /
             pathType: Prefix
             backend:
               service:
