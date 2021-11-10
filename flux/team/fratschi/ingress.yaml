@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-service
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /fratschi(/|$)(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: go-service
+                port:
+                  number: 8080
