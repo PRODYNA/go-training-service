@@ -17,8 +17,6 @@ spec:
       retries: 1
   values:
     loki:
-      nodeSelector:
-        kubernetes.io/arch: arm64
       persistence:
         enabled: true
       replicas: 1
@@ -27,7 +25,7 @@ spec:
         additionallLabels:
         - release: monitoring
       ingress:
-        enabled: true
+        enabled: false
         hosts:
         - host: "loki.home.krizic.net"
           paths:
