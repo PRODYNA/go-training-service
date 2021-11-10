@@ -696,7 +696,7 @@ spec:
         tls:
         - secretName: grafana-tls
           hosts:
-            - "grafana..20.71.73.61.nip.io"
+            - "grafana.20.71.73.61.nip.io"
     
       sidecar:
         dashboards:
