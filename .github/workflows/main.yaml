@@ -22,5 +22,6 @@ jobs:
           password: ${{ secrets.REGISTRY_PASSWORD }}
       - run: |
           echo "GIT_BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+          echo "${GIT_BRANCH}"
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:${{ env.GIT_BRANCH }}
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:${{ env.GIT_BRANCH }}
