@@ -23,6 +23,6 @@ jobs:
       - run: |
           # docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
 
-          cd /home/runner/work/go-training-service/go-training-service/src/"${GITHUB_REF##*/}"
+          cd src/"${GITHUB_REF##*/}"
           docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
