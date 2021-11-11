@@ -24,5 +24,5 @@ jobs:
           # docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
 
           cd src/"${GITHUB_REF##*/}"
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/"${GITHUB_REF##*/}":latest
+          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/"${GITHUB_REF##*/}":latest
