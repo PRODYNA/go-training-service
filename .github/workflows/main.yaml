@@ -23,6 +23,6 @@ jobs:
       - run: |
           # docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
           pwd
-          cd "src/${GITHUB_REF##*/}"
-          docker build "src/${GITHUB_REF##*/}" -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
+          cd /home/runner/work/go-training-service/go-training-service/src/dkrizic
+          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
           docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
