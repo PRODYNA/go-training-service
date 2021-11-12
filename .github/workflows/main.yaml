@@ -25,16 +25,23 @@ jobs:
         run: echo "TEAM_MEMBER_NAME=${GITHUB_REF##*/}" >> "$GITHUB_ENV"
         id: m_name
 
-      - name: 'AZ Login'
-        uses: azure/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-        id: az_login
+#      - name: 'AZ Login'
+#        uses: azure/login@v1
+#        with:
+#          creds: ${{ secrets.AZURE_CREDENTIALS }}
+#        id: az_login
 
       - name: 'Docker Build'
         run: docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.TEAM_MEMBER_NAME }}:latest
         id: d_build
         if: ${{ false }} # Disable for now
+
+      - name: 'Docker AZ Login'
+        uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
 
 #      - name: 'Docker Push'
 #        uses: azure/docker-login@v1
