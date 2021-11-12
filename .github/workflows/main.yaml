@@ -23,19 +23,22 @@ jobs:
 
       - name: 'Environment setup'
         run: |
-          echo "base ref: $GITHUB_BASE_REF"
-          echo "ref: $GITHUB_REF"
-          echo "head ref: $GITHUB_HEAD_REF"
-          echo "ref name: $GITHUB_REF_NAME"
           user=
           if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
             user=${GITHUB_HEAD_REF##*/}
           elif [[ $GITHUB_EVENT_NAME == 'push' ]]; then
-            user=${GITHUB_REF##*/}
+            commit_msg=$(echo "${{ github.event.head_commit.message }}" | head -n 1)
+            user=$(echo $commit_msg | grep -o 'team/.*' | cut -f2- -d/)
           else
             echo "Cannot figure out username"
+            exit 1
+          fi
+
+          if [[ -z "$user" ]]; then
+            echo "Got empty username"
             exit 2
           fi
+
           echo "Running for user: $user"
           echo "TEAM_MEMBER_NAME=$user" >> "$GITHUB_ENV"
           echo "IMAGE_TAG=${{ secrets.REGISTRY_LOGIN_SERVER }}/$user:latest" >> "$GITHUB_ENV"
@@ -54,12 +57,14 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
         id: d_az_login
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: ${{ false }}
 
       - name: 'Docker Push'
         run: docker push ${{ env.IMAGE_TAG }}
         id: d_push
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: ${{ false }}
 
       - name: 'Kube Deploy'
         uses: actions-hub/kubectl@master
@@ -68,5 +73,7 @@ jobs:
         with:
           args: -n rollout restart deployment
         id: kube_deploy
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        #if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        if: ${{ false }}
+
 
