@@ -8,10 +8,6 @@ on:
     branches:
       - team/**
 
-defaults:
-  run:
-    shell: bash
-
 jobs:
 
   build-image:
