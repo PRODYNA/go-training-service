@@ -23,15 +23,12 @@ jobs:
 
       - name: 'Environment setup'
         run: |
-          echo "base ref: $GITHUB_BASE_REF"
-          echo "ref: $GITHUB_REF"
-          echo "head ref: $GITHUB_HEAD_REF"
-          echo "ref name: $GITHUB_REF_NAME"
           user=
           if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
             user=${GITHUB_HEAD_REF##*/}
           elif [[ $GITHUB_EVENT_NAME == 'push' ]]; then
-            user=${GITHUB_REF##*/}
+            commit_msg=$(echo "${{ github.event.head_commit.message }}" | head -n 1)
+            user=$(echo $commit_msg | grep -o 'team/.*' | cut -f2- -d/)
           else
             echo "Cannot figure out username"
             exit 2
