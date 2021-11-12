@@ -47,3 +47,12 @@ jobs:
         id: d_push
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
+      - name: 'Kube Deploy'
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }} #need to set this in place
+        with:
+          args: -n rollout restart deployment
+        id: kube_deploy
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+
