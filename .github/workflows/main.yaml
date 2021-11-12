@@ -29,7 +29,7 @@ jobs:
           echo "ref name: $GITHUB_REF_NAME"
           user=
           if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
-            user=${GITHUB_BASE_REF##*/}
+            user=${$GITHUB_REF_NAME##*/}
           elif [[ $GITHUB_EVENT_NAME == 'push' ]]; then
             user=${GITHUB_REF##*/}
           else
