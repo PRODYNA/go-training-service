@@ -30,6 +30,7 @@ jobs:
         id: az_login
 
       - name: 'Docker Build'
+        uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
