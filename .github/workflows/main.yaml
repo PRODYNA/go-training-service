@@ -1,9 +1,9 @@
 name: 'Go Training'
 
 on:
-#  push:
-#    branches:
-#      - team/**
+  push:
+    branches:
+      - team/**
   pull_request:
     branches:
       - team/**
