@@ -23,8 +23,18 @@ jobs:
 
       - name: 'Environment setup'
         run: |
-          echo "TEAM_MEMBER_NAME=${GITHUB_REF##*/}" >> "$GITHUB_ENV"
-          echo "IMAGE_TAG=${{ secrets.REGISTRY_LOGIN_SERVER }}/${GITHUB_REF##*/}:latest" >> "$GITHUB_ENV"
+          user=
+          if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
+            user=${GITHUB_BASE_REF##*/}
+          elif [[ $GITHUB_EVENT_NAME == 'push' ]]; then
+            user=${GITHUB_REF##*/}
+          else
+            echo "Cannot figure out stage"
+            exit 2
+          fi
+          echo "Running for user: $user"
+          echo "TEAM_MEMBER_NAME=$user" >> "$GITHUB_ENV"
+          echo "IMAGE_TAG=${{ secrets.REGISTRY_LOGIN_SERVER }}/$user:latest" >> "$GITHUB_ENV"
         id: env_setup
 
       - name: 'Docker Build'
