@@ -23,9 +23,10 @@ jobs:
 
       - name: 'Environment setup'
         run: |
-          echo "$GITHUB_BASE_REF"
-          echo "$GITHUB_REF"
-          echo "$GITHUB_HEAD_REF"
+          echo "base ref: $GITHUB_BASE_REF"
+          echo "ref: $GITHUB_REF"
+          echo "head ref: $GITHUB_HEAD_REF"
+          echo "ref name: $GITHUB_REF_NAME"
           user=
           if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
             user=${GITHUB_BASE_REF##*/}
