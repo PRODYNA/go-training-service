@@ -10,7 +10,9 @@ on:
 
 jobs:
 
-  build-image:
+  go-training-ci:
+    name: 'Go Training Pipeline'
+
     runs-on: ubuntu-20.04
 
     steps:
@@ -30,16 +32,22 @@ jobs:
         id: az_login
 
       - name: 'Docker Build'
+        run: docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.TEAM_MEMBER_NAME }}:latest
+        id: d_build
+        if: ${{ false }} # Disable for now
+
+      - name: 'Docker Push'
         uses: azure/docker-login@v1
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-        run: |
-          cd src/${{ env.TEAM_MEMBER_NAME }}
-          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.TEAM_MEMBER_NAME }}:latest
-        id: d_build
-        if: ${{ false }} # Disable for now
+        run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.TEAM_MEMBER_NAME }}:latest
+        id: d_push
+        if: ${{ false }}
+
+     # - name: 'Kube Deploy'
+
 
 
 
