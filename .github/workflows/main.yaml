@@ -1,28 +1,73 @@
-on: [push]
-name: ServicePipeline
+name: 'Go Training'
+
+on:
+  pull_request:
+    branches:
+      - team/**
+  push:
+    branches:
+      - team/**
+
+defaults:
+  run:
+    shell: bash
 
 jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    steps:
-      # checkout the repo
-      - name: 'Checkout GitHub Action'
-        uses: actions/checkout@main
 
-      - name: 'Login via Azure CLI'
+  build-image:
+    runs-on: ubuntu-20.04
+
+    steps:
+
+      - name: 'Checkout Project'
+        uses: actions/checkout@v2
+        id: p_checkout
+
+      - name: 'Team Member Name'
+        run: echo "TEAM_MEMBER_NAME=${GITHUB_REF##*/}" >> "$GITHUB_ENV"
+        id: m_name
+
+      - name: 'AZ Login'
         uses: azure/login@v1
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
+        id: az_login
 
-      - name: 'Build and push image'
-        uses: azure/docker-login@v1
+      - name: 'Docker Build'
         with:
           login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
-      - run: |
-          # docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
+        run: |
+          cd src/${{ env.TEAM_MEMBER_NAME }}
+          docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.TEAM_MEMBER_NAME }}:latest
+        id: d_build
+        if: ${{ false }} # Disable for now
 
-          cd src/"${GITHUB_REF##*/}"
-          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/"${GITHUB_REF##*/}":latest
-          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/"${GITHUB_REF##*/}":latest
+
+
+
+#  build-and-deploy:
+#    runs-on: ubuntu-latest
+#    steps:
+#      # checkout the repo
+#      - name: 'Checkout GitHub Action'
+#        uses: actions/checkout@main
+#
+#      - name: 'Login via Azure CLI'
+#        uses: azure/login@v1
+#        with:
+#          creds: ${{ secrets.AZURE_CREDENTIALS }}
+#
+#      - name: 'Build and push image'
+#        uses: azure/docker-login@v1
+#        with:
+#          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+#          username: ${{ secrets.REGISTRY_USERNAME }}
+#          password: ${{ secrets.REGISTRY_PASSWORD }}
+#      - run: |
+#          # docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/service:"${GITHUB_REF##*/}"
+#
+#          cd src/"${GITHUB_REF##*/}"
+#          docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/"${GITHUB_REF##*/}":latest
+#          docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/"${GITHUB_REF##*/}":latest
