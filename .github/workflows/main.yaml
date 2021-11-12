@@ -23,13 +23,13 @@ jobs:
 
       - name: 'Environment setup'
         run: |
-          echo "TEAM_MEMBER="${GITHUB_REF##*/}" >> "$GITHUB_ENV"
-          echo "IMAGE_TAG=${{ secrets.REGISTRY_LOGIN_SERVER }}/"$TEAM_MEMBER":latest" >> "$GITHUB_ENV"
+          echo "TEAM_MEMBER_NAME=${GITHUB_REF##*/}" >> "$GITHUB_ENV"
+          echo "IMAGE_TAG=${{ secrets.REGISTRY_LOGIN_SERVER }}/$TEAM_MEMBER_NAME:latest" >> "$GITHUB_ENV"
         id: env_setup
 
       - name: 'Docker Build'
         run: |
-          cd src/${{ env.TEAM_MEMBER }}
+          cd src/${{ env.TEAM_MEMBER_NAME }}
           docker build . -t ${{ env.IMAGE_TAG }}
         id: d_build
 
