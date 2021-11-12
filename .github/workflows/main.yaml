@@ -36,15 +36,15 @@ jobs:
         id: d_build
         if: ${{ false }} # Disable for now
 
-      - name: 'Docker Push'
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-        run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.TEAM_MEMBER_NAME }}:latest
-        id: d_push
-        if: ${{ false }}
+#      - name: 'Docker Push'
+#        uses: azure/docker-login@v1
+#        with:
+#          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+#          username: ${{ secrets.REGISTRY_USERNAME }}
+#          password: ${{ secrets.REGISTRY_PASSWORD }}
+#        run: docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/${{ env.TEAM_MEMBER_NAME }}:latest
+#        id: d_push
+#        if: ${{ false }}
 
      # - name: 'Kube Deploy'
 
