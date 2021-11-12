@@ -6,7 +6,7 @@ on:
       - team/**
   push:
     branches:
-      - team/**
+      - main
 
 jobs:
 
