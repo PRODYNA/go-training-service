@@ -31,8 +31,14 @@ jobs:
             user=$(echo $commit_msg | grep -o 'team/.*' | cut -f2- -d/)
           else
             echo "Cannot figure out username"
+            exit 1
+          fi
+
+          if [[ -z "$user" ]]; then
+            echo "Got empty username"
             exit 2
           fi
+
           echo "Running for user: $user"
           echo "TEAM_MEMBER_NAME=$user" >> "$GITHUB_ENV"
           echo "IMAGE_TAG=${{ secrets.REGISTRY_LOGIN_SERVER }}/$user:latest" >> "$GITHUB_ENV"
