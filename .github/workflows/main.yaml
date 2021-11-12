@@ -27,7 +27,7 @@ jobs:
           elif [[ $GITHUB_EVENT_NAME == 'push' ]]; then
             user=${GITHUB_REF##*/}
           else
-            echo "Cannot figure out stage"
+            echo "Cannot figure out username"
             exit 2
           fi
           echo "Running for user: $user"
