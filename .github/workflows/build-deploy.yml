@@ -72,6 +72,6 @@ jobs:
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }} #need to set this in place
         with:
-          args: rollout restart deployment
+          args: -n ${{ env.TEAM_MEMBER_NAME }} rollout restart deployment
         id: kube_deploy
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
