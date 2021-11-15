@@ -1,11 +1,6 @@
-name: 'Go Training'
+name: 'Go Training Build'
 
 on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'src/**'
   pull_request:
     branches:
       - main
@@ -51,9 +46,11 @@ jobs:
         run: |
           cd src/${{ env.TEAM_MEMBER_NAME }}
           docker build . -t ${{ env.IMAGE_TAG }}
-          mkdir -p ./images
-          docker save -o ./images/${{ env.TEAM_MEMBER_NAME }}.tar ${{ env.IMAGE_TAG }}
-          ls -lah ./images
+          cd ../../
+          mkdir -p images
+          docker save -o images/${{ env.TEAM_MEMBER_NAME }}.tar ${{ env.IMAGE_TAG }}
+          ls -lah
+          ls -lah images
           pwd
         id: d_build
 
@@ -61,69 +58,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: ${{ env.TEAM_MEMBER_NAME }}
-          path: ./images/${{ env.TEAM_MEMBER_NAME }}.tar
+          path: images/${{ env.TEAM_MEMBER_NAME }}.tar
           if-no-files-found: error
         id: d_image_cache
-
-
-  service-deploy:
-    name: 'Deploy service'
-    runs-on: ubuntu-20.04
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push' # Runs only when pushing to main
-
-    steps:
-
-      - name: 'Environment setup'
-        run: |
-          user=
-          if [[ $GITHUB_EVENT_NAME == 'pull_request' ]]; then
-            user=${GITHUB_HEAD_REF##*/}
-          elif [[ $GITHUB_EVENT_NAME == 'push' ]]; then
-            commit_msg=$(echo "${{ github.event.head_commit.message }}" | head -n 1)
-            user=$(echo $commit_msg | grep -o 'team/.*' | cut -f2- -d/)
-          else
-            echo "Cannot figure out username"
-            exit 1
-          fi
-
-          if [[ -z "$user" ]]; then
-            echo "Got empty username"
-            exit 2
-          fi
-
-          echo "Running for user: $user"
-          echo "TEAM_MEMBER_NAME=$user" >> "$GITHUB_ENV"
-          echo "IMAGE_TAG=${{ secrets.REGISTRY_LOGIN_SERVER }}/$user:latest" >> "$GITHUB_ENV"
-        id: env_setup
-
-      - name: 'AZ Login'
-        uses: azure/docker-login@v1
-        with:
-          login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
-        id: d_az_login
-
-      # First need to fetch the image
-
-      - name: 'Retrieve Image'
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ env.TEAM_MEMBER_NAME }}
-          path: ./images
-
-      - name: 'Docker Push'
-        run: |
-          docker load -i -q ./images/${{ env.TEAM_MEMBER_NAME }}.tar
-          docker push ${{ env.IMAGE_TAG }}
-        id: d_push
-
-      - name: 'Kube Deploy'
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }} #need to set this in place
-        with:
-          args: rollout restart deployment
-        id: kube_deploy
-
 
