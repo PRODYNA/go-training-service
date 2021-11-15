@@ -54,6 +54,7 @@ jobs:
           mkdir -p ./images
           docker save -o ./images/${{ env.TEAM_MEMBER_NAME }}.tar ${{ env.IMAGE_TAG }}
           ls -lah ./images
+          pwd
         id: d_build
 
       - name: 'Cache Image'
