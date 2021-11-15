@@ -5,16 +5,16 @@ import (
 	"net/http"
 )
 
-type server struct {}
+type server struct{}
 
 func main() {
-  s := server{}
+	s := server{}
 
-  log.Fatal(http.ListenAndServe(":8080", &s))
+	log.Fatal(http.ListenAndServe(":8080", &s))
 }
 
 func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(200)
-	w.Write([]byte(`{ "ok" : true , "status": "ok", "instance": "akourtesas", "version": "7"}`))
+	w.Write([]byte(`{ "ok" : true , "status": "ok", "instance": "akourtesas", "version": "8"}`))
 }
