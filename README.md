@@ -19,6 +19,8 @@ new service simply follow the steps outlined below:
 7. Merge your `PR` to `main` and wait for the deployment process to complete
 8. Verify you service is reachable by using the following link `<name_from_step_1>.20.71.73.61.nip.io`.
 
+## Notes
+
 :warning: **When merging your `PR` to the `main` branch please make sure to avoid changing the default commit message. 
 If providing a custom commit message is mandatory, please make sure to include your branch's name (i.e team/<user_name>)**
 
