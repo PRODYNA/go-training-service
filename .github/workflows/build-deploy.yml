@@ -51,9 +51,6 @@ jobs:
         run: |
           cd src/${{ env.TEAM_MEMBER_NAME }}
           docker build . -t ${{ env.IMAGE_TAG }}
-          cd ../../
-          mkdir -p images
-          docker save -o images/${{ env.TEAM_MEMBER_NAME }}.tar ${{ env.IMAGE_TAG }}
         id: d_build
 
       - name: 'AZ Login'
@@ -66,9 +63,7 @@ jobs:
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
       - name: 'Docker Push'
-        run: |
-          docker load -q -i ${{ env.TEAM_MEMBER_NAME }}.tar
-          docker push ${{ env.IMAGE_TAG }}
+        run: docker push ${{ env.IMAGE_TAG }}
         id: d_push
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
