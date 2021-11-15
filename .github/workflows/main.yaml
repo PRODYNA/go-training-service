@@ -53,6 +53,7 @@ jobs:
           docker build . -t ${{ env.IMAGE_TAG }}
           mkdir -p ./images
           docker save -o ./images/${{ env.TEAM_MEMBER_NAME }}.tar ${{ env.IMAGE_TAG }}
+          ls -lah ./images
         id: d_build
 
       - name: 'Cache Image'
@@ -60,6 +61,7 @@ jobs:
         with:
           name: ${{ env.TEAM_MEMBER_NAME }}
           path: ./images/${{ env.TEAM_MEMBER_NAME }}.tar
+          if-no-files-found: error
         id: d_image_cache
 
 
