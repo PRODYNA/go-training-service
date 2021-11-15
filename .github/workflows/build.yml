@@ -1,4 +1,4 @@
-name: 'Go Training Build'
+name: 'Go Build'
 
 on:
   pull_request:
@@ -10,7 +10,7 @@ on:
 jobs:
 
   project-build:
-    name: 'Build project'
+    name: 'Go build'
     runs-on: ubuntu-20.04
 
     steps:
