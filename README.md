@@ -10,18 +10,26 @@ deploying a simple Go service.
 Using this project to develop and deploy a small Go service is quite simple and straightforward. To create and deploy a
 new service simply follow the steps outlined below:
 
-1. Pick a name for the folder where your source code will live (under the `src` directory).
-2. Start by branching off of the project's `main` branch. Your new branch should follow this convention `team/<name_from_step_1>`.
-3. Copy all the contents from the `template` folder. 
-4. Make sure to rename all occurrences of `template` to match the name you selected at step 1.
-5. Perform all the desired code changes and push your local branch to the remote
-6. Open up a `PR` and verify that your code can be built without any issues.
-7. Merge your `PR` to `main` and wait for the deployment process to complete
-8. Verify you service is reachable by using the following link `<name_from_step_1>.20.71.73.61.nip.io`.
+### Code preparation
 
-## Notes
+1. Start by creating a branch from `main`. **Make sure that your branch adheres to this naming convention `team/<username>`**.
+For example, a valid branch name is `team/dkrizic`.
+2. Copy all the contents of the `src/template/` folder in a new folder named `/src/<username>`. **Make sure that the
+username defined in the branch name is the same as the name of your folder.**
+3. Rename all occurrences of `template` within the copied code to match your **username**.
+4. Do all the necessary code changes to your Go code.
 
-:warning: **When merging your `PR` to the `main` branch please make sure to avoid changing the default commit message. 
-If providing a custom commit message is mandatory, please make sure to include your branch's name (i.e team/<user_name>)**
+### Pull Requests
 
-![gh commit](./mr_commit.png)
+1. Once all the code changes are done, you can go ahead and open up a pull-request targeting the `main` branch.
+2. Opening up a pull request will trigger a CI run for your code. This will build your code and verify its integrity.
+3. You can perform any number of commits whilst the PR is open, each triggering a new CI run.
+
+### Merging
+
+1. Upon finalizing your code changes and given that the newly added code gets built properly, you can go ahead and merge to `main`.
+2. :warning: **Make sure that you do not tamper with GitHub's default commit message as it contains the branch name**. The latter is
+required for the retrieving deployment related information. If a custom message must be provided, please make sure to include
+the branch name in it in lowercase.
+3. After merging the changes and once the CI is finished, you can verify the liveliness of your service by visiting the following
+link `<username>.20.71.73.61.nip.io`
