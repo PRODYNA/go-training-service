@@ -39,6 +39,12 @@ jobs:
           echo "IMAGE_TAG=${{ secrets.REGISTRY_LOGIN_SERVER }}/$user:latest" >> "$GITHUB_ENV"
         id: env_setup
 
+      - name: 'Retrieve Image'
+        uses: actions/download-artifact@v2
+        with:
+          name: ${{ env.TEAM_MEMBER_NAME }}
+        id: d_image_retrieve
+
       - name: 'AZ Login'
         uses: azure/docker-login@v1
         with:
@@ -46,14 +52,6 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
         id: d_az_login
-
-      # First need to fetch the image
-
-      - name: 'Retrieve Image'
-        uses: actions/download-artifact@v2
-        with:
-          name: ${{ env.TEAM_MEMBER_NAME }}
-        id: d_image_retrieve
 
       - name: 'Docker Push'
         run: |
