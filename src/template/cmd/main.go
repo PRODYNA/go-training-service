@@ -10,6 +10,7 @@ type server struct {}
 func main() {
   s := server{}
 
+  log.Printf("Starting server")
   log.Fatal(http.ListenAndServe(":8080", &s))
 }
 
