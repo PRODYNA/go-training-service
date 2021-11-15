@@ -20,3 +20,5 @@ new service simply follow the steps outlined below:
 6. Open up a `PR` and verify that your code can be built without any issues.
 7. Merge your `PR` to `main` and wait for the deployment process to complete
 8. Verify you service is reachable by using the following link `<name_from_step_1>.20.71.73.61.nip.io`.
+
+:warning: **When merging your `PR` to the `main` branch please make sure to avoid**
