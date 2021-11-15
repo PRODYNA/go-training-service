@@ -63,14 +63,14 @@ jobs:
           username: ${{ secrets.REGISTRY_USERNAME }}
           password: ${{ secrets.REGISTRY_PASSWORD }}
         id: d_az_login
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
       - name: 'Docker Push'
         run: |
           docker load -q -i ${{ env.TEAM_MEMBER_NAME }}.tar
           docker push ${{ env.IMAGE_TAG }}
         id: d_push
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
 
       - name: 'Kube Deploy'
         uses: actions-hub/kubectl@master
@@ -79,4 +79,4 @@ jobs:
         with:
           args: rollout restart deployment
         id: kube_deploy
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
