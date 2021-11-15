@@ -6,7 +6,8 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
-  - host: "dkrizic.20.71.73.61.nip.io"
+  # TODO: Format: <username>.20.71.73.61.nip.io"
+  - host: "template.20.71.73.61.nip.io"
     http:
       paths:
       - pathType: Prefix
@@ -18,5 +19,6 @@ spec:
               number: 80
   tls:
   - hosts:
-    - "dkrizic.20.71.73.61.nip.io"
+    # TODO: Must match the name above
+    - "template.20.71.73.61.nip.io"
     secretName: ingress-tls

@@ -16,7 +16,15 @@ spec:
     spec:
       containers:
         - name: go-service
-          image: crgotraining.azurecr.io/dkrizic:latest
+          # TODO format: crgotraining.azurecr.io/<username>>:latest
+          image: crgotraining.azurecr.io/template:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          resources:
+            requests:
+              cpu: 100m
+              memory: 15Mi
+            limits:
+              cpu: 100m
+              memory: 15Mi

@@ -14,7 +14,7 @@ func main() {
 }
 
 func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-
 	w.WriteHeader(200)
-	w.Write([]byte(`{ "ok" : true , "status": "ok", "instance": "dkrizic", "version": "2"}`))
+	w.Write([]byte(`{ "ok" : true , "status": "ok", "instance": "template", "version": "2"}`))
+	log.Printf("One request from %s", r.RemoteAddr )
 }
