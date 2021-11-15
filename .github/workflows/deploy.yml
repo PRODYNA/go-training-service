@@ -53,11 +53,11 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: ${{ env.TEAM_MEMBER_NAME }}
-          path: ./images
+        id: d_image_retrieve
 
       - name: 'Docker Push'
         run: |
-          docker load -i -q ./images/${{ env.TEAM_MEMBER_NAME }}.tar
+          docker load -q -i ${{ env.TEAM_MEMBER_NAME }}.tar
           docker push ${{ env.IMAGE_TAG }}
         id: d_push
 
