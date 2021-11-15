@@ -30,6 +30,6 @@ username defined in the branch name is the same as the name of your folder.**
 1. Upon finalizing your code changes and given that the newly added code gets built properly, you can go ahead and merge to `main`.
 2. :warning: **Make sure that you do not tamper with GitHub's default commit message as it contains the branch name**. The latter is
 required for the retrieving deployment related information. If a custom message must be provided, please make sure to include
-the branch name in it in lowercase.
+the branch name in lowercase.
 3. After merging the changes and once the CI is finished, you can verify the liveliness of your service by visiting the following
 link `<username>.20.71.73.61.nip.io`
