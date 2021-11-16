@@ -6,7 +6,6 @@ metadata:
     cert-manager.io/cluster-issuer: letsencrypt
 spec:
   rules:
-  # TODO: Format: <username>.20.71.73.61.nip.io"
   - host: "geoo.20.71.73.61.nip.io"
     http:
       paths:
@@ -19,6 +18,5 @@ spec:
               number: 80
   tls:
   - hosts:
-    # TODO: Must match the name above
     - "geoo.20.71.73.61.nip.io"
     secretName: ingress-tls

@@ -16,8 +16,7 @@ spec:
     spec:
       containers:
         - name: go-service
-          # TODO format: crgotraining.azurecr.io/<username>>:latest
-          image: crgotraining.azurecr.io/template:latest
+          image: crgotraining.azurecr.io/geoo:latest
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
