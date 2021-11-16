@@ -10,7 +10,7 @@ spec:
   - interval: 60s
     path: /metrics
     scrapeTimeout: 30s
-    targetPort: 8083
+    targetPort: metrics
   namespaceSelector:
     matchNames:
     - fratschi
