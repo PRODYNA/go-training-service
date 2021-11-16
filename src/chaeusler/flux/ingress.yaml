@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-service
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt
+spec:
+  rules:
+  # TODO: Format: <username>.20.71.73.61.nip.io"
+  - host: "chaeusler.20.71.73.61.nip.io"
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: go-service
+            port:
+              number: 80
+  tls:
+  - hosts:
+    # TODO: Must match the name above
+    - "chaeusler.20.71.73.61.nip.io"
+    secretName: ingress-tls
