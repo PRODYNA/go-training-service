@@ -6,3 +6,7 @@ resources:
   - deployment.yaml
   - service.yaml
   - ingress.yaml
+configMapGenerator:
+  - name: go-service
+    files:
+      - config.yaml
