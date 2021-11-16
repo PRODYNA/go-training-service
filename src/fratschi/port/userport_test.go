@@ -4,6 +4,7 @@ import (
 	"github.com/gorilla/mux"
 	"github.com/prodyna/go-training/fratschi/adapter"
 	"github.com/prodyna/go-training/fratschi/config"
+	"github.com/stretchr/testify/assert"
 	"io/ioutil"
 	"net/http"
 	"net/http/httptest"
@@ -21,6 +22,7 @@ func TestHandleUserPort(t *testing.T) {
 
 	router.ServeHTTP(rec, httptest.NewRequest("GET", "https://any:1234/user", strings.NewReader(`{ }`)))
 
+	assert.Equal(t, 200 , rec.Code)
 }
 
 
@@ -29,7 +31,7 @@ type Mock struct {}
 
 func (m Mock) RoundTrip(*http.Request) (*http.Response, error) {
 	b := ioutil.NopCloser(strings.NewReader(respone))
-	res := http.Response{Body:b }
+	res := http.Response{Body:b ,StatusCode: 500}
 	return &res, nil
 }
 

@@ -25,6 +25,9 @@ spec:
               containerPort: 8081
             - name: metrics
               containerPort: 8082
+          volumeMounts:
+            - name: go-service
+              mountPath: /config
           resources:
             requests:
               cpu: 100m
@@ -32,3 +35,7 @@ spec:
             limits:
               cpu: 100m
               memory: 15Mi
+      volumes:
+        - name: go-service
+          configMap:
+            name: go-service

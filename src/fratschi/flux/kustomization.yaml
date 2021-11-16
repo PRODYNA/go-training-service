@@ -7,3 +7,8 @@ resources:
   - service.yaml
   - ingress.yaml
   - servicemonitor.yaml
+
+configMapGenerator:
+  - name: go-service
+    files:
+      - config.yaml
