@@ -40,7 +40,7 @@ type Mock struct {}
 
 func (m Mock) RoundTrip(*http.Request) (*http.Response, error) {
 	b := ioutil.NopCloser(strings.NewReader(respone))
-	res := http.Response{Body:b }
+	res := http.Response{Body:b ,StatusCode: 200}
 	return &res, nil
 }
 

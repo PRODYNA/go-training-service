@@ -38,4 +38,4 @@ spec:
       volumes:
         - name: go-service
           configMap:
-            name: go-service
+            name: go-service-map
