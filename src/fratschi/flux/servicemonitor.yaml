@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  labels:
+    prometheus: monitoring
+    release: monitoring
+  name: go-service
+spec:
+  endpoints:
+  - interval: 60s
+    path: /metrics
+    scrapeTimeout: 30s
+    targetPort: 8083
+  namespaceSelector:
+    matchNames:
+    - fratschi
+  selector:
+    matchLabels:
+      app: go-service
