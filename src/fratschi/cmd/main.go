@@ -47,15 +47,14 @@ func (s server) InitWeb() {
 	a := adapter.NewHttpBin(s.Config, http.DefaultClient)
 	port.HandleUserPort(router, a)
 	log.Info().Str("port", s.Config.Web.Port).Msg("starting web port")
-	log.Err(http.ListenAndServe(":" + s.Config.Web.Port, router))
-
-
+	log.Err(http.ListenAndServe(s.Config.Web.GetPort(), router))
 }
+
 func (s server) InitProbes() {
 	router := mux.NewRouter()
 	ps := probes.NewProbeService()
 	ps.HandleProbes(router)
-	log.Err(http.ListenAndServe(":" + s.Config.Probe.Port, router))
+	log.Err(http.ListenAndServe(s.Config.Probe.GetPort(), router))
 }
 
 func (s server) Init() {

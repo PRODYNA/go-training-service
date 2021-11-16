@@ -1,6 +1,5 @@
 package config
 
-
 type Configuration struct {
 	Web     Web     `yaml:"web"`
 	Probe   Probe   `yaml:"probe"`
@@ -20,5 +19,13 @@ type Metrics struct {
 }
 
 func (m Metrics) GetPort() string {
+	return ":" + m.Port
+}
+
+func (m Probe) GetPort() string {
+	return ":" + m.Port
+}
+
+func (m Web) GetPort() string {
 	return ":" + m.Port
 }
