@@ -45,7 +45,10 @@ func (s server) InitMetrics() {
 
 func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(200)
-	w.Write([]byte(`{ "ok" : true , "status": "ok", "instance": "template", "version": "4"}`))
+	_, err := w.Write([]byte(`{ "ok" : true , "status": "ok", "instance": "template", "version": "4"}`))
+	if err != nil {
+		return
+	}
 	log.Printf("One request from %s", r.RemoteAddr)
 }
 
