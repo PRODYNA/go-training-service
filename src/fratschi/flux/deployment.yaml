@@ -20,7 +20,12 @@ spec:
           image: crgotraining.azurecr.io/fratschi:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - name: web
+              containerPort: 8080
+            - name: probes
+              containerPort: 8081
+            - name: metrics
+              containerPort: 8083
           resources:
             requests:
               cpu: 102m
