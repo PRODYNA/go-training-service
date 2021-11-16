@@ -24,7 +24,7 @@ spec:
             - name: probes
               containerPort: 8081
             - name: metrics
-              containerPort: 8083
+              containerPort: 8082
           resources:
             requests:
               cpu: 100m

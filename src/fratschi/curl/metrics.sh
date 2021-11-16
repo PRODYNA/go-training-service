@@ -1,1 +1,1 @@
-curl localhost:8083/metrics
+curl localhost:8082/metrics
