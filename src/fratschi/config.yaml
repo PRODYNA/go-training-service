@@ -4,4 +4,3 @@ probe:
   port: "8081"
 metrics:
   port: "8082"
-pwd: ${Env:PWD}
