@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: go-service-map
+data:
+  config.yaml: |
+    web:
+      port: "8080"
+    probe:
+      port: "8081"
+    metrics:
+      port: "8082"
+
+

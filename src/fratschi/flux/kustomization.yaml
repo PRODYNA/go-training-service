@@ -2,13 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: fratschi
 
-configMapGenerator:
-  - name: go-service-map
-    files:
-      - config.yaml
-
 resources:
   - namespace.yaml
+  - configmap.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
