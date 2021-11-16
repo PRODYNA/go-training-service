@@ -1,6 +1,0 @@
-web:
-  port: "8080"
-probe:
-  port: "8081"
-metrics:
-  port: "8082"
