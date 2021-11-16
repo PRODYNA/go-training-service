@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/gorilla/mux"
 	"github.com/prodyna/goprobes/probes"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/rs/zerolog"
 	"github.com/rs/zerolog/log"
 	"net/http"
@@ -14,13 +15,13 @@ import (
 type server struct{}
 
 func main() {
+	log.Info().Msg("starting server")
 
 	s := server{}
 	s.Init()
-
 	go s.InitProbes()
+	go s.InitMetrics()
 
-	log.Info().Msg("starting server")
 	s.WaitForProbes()
 }
 
@@ -35,6 +36,11 @@ func (s server) InitProbes() {
 	ps.HandleProbes(router)
 
 	log.Err(http.ListenAndServe(":8081", router))
+}
+
+func (s server) InitMetrics() {
+	metric := promhttp.Handler()
+	log.Err(http.ListenAndServe(":8082", metric))
 }
 
 func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
