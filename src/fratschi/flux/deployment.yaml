@@ -28,15 +28,15 @@ spec:
           startupProbe:
             httpGet:
               path: /start
-              port: 8082
+              port: 8081
           readinessProbe:
             httpGet:
               path: /ready
-              port: 8082
+              port: 8081
           livenessProbe:
             httpGet:
               path: /live
-              port: 8082
+              port: 8081
           volumeMounts:
             - name: go-service
               mountPath: /config
