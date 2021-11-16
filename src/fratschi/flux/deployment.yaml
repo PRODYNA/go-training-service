@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
         - name: go-service
-          # TODO format: crgotraining.azurecr.io/<username>>:latest
           image: crgotraining.azurecr.io/fratschi:latest
           imagePullPolicy: Always
           ports:
@@ -28,8 +27,8 @@ spec:
               containerPort: 8083
           resources:
             requests:
-              cpu: 102m
+              cpu: 100m
               memory: 15Mi
             limits:
-              cpu: 102m
+              cpu: 100m
               memory: 15Mi
