@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/gorilla/mux"
+	"github.com/prodyna/go-training-service/tree/team/sherdt/web"
 	"github.com/prodyna/goprobes/probes"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/rs/zerolog"
@@ -12,7 +13,8 @@ import (
 	"syscall"
 )
 
-type server struct{}
+type server struct {
+}
 
 func main() {
 	log.Info().Msg("starting server")
@@ -21,8 +23,16 @@ func main() {
 	s.Init()
 	go s.InitProbes()
 	go s.InitMetrics()
+	go s.InitWeb()
 
 	s.WaitForProbes()
+}
+
+func (s server) InitWeb() {
+	router := mux.NewRouter()
+	web.HandleWebPort(router)
+	log.Info().Str("port", ":8080").Msg("starting web port")
+	log.Err(http.ListenAndServe(":8080", router))
 }
 
 func (s server) Init() {
