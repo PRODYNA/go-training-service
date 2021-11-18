@@ -1,4 +1,4 @@
-module github.com/prodyna/go-training/sherdt
+module github.com/prodyna/go-training-service/tree/team/sherdt
 
 go 1.17
 
@@ -22,4 +22,5 @@ require (
 	github.com/prometheus/procfs v0.6.0 // indirect
 	golang.org/x/sys v0.0.0-20210809222454-d867a43fc93e // indirect
 	google.golang.org/protobuf v1.26.0-rc.1 // indirect
+	gopkg.in/yaml.v3 v3.0.0-20210107192922-496545a6307b // indirect
 )
