@@ -25,6 +25,21 @@ spec:
               containerPort: 8081
             - name: metrics
               containerPort: 8082
+          startupProbe:
+            httpGet:
+              path: /start
+              port: 8081
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8081
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: 8081
+          volumeMounts:
+            - name: go-service
+              mountPath: /config
           resources:
             requests:
               cpu: 100m
@@ -32,3 +47,7 @@ spec:
             limits:
               cpu: 100m
               memory: 15Mi
+      volumes:
+        - name: go-service
+          configMap:
+            name: go-service-map

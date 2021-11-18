@@ -2,6 +2,7 @@ package adapter
 
 import (
 	"encoding/json"
+	"errors"
 	"github.com/prodyna/go-training/fratschi/config"
 	"github.com/prodyna/go-training/fratschi/data"
 	"io/ioutil"
@@ -35,6 +36,10 @@ func (h httpBinImpl) DoBackendCall() (*data.Result, error) {
 	res, err := h.Client.Do(req)
 	if err != nil {
 		return nil, err
+	}
+
+	if res.StatusCode != 200 {
+		return nil, errors.New("got a 500")
 	}
 
 	body, err := ioutil.ReadAll(res.Body)

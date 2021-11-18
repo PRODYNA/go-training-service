@@ -3,7 +3,9 @@ kind: Kustomization
 namespace: fratschi
 resources:
   - namespace.yaml
+  - configmap.yaml
   - deployment.yaml
   - service.yaml
   - ingress.yaml
   - servicemonitor.yaml
+
