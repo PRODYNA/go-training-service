@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-service
+  labels:
+    app: go-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: go-service
+  template:
+    metadata:
+      labels:
+        app: go-service
+    spec:
+      containers:
+        - name: go-service
+          image: crgotraining.azurecr.io/fratschin:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /start
+              port: 8081
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8081
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: 8081
+          resources:
+            requests:
+              cpu: 100m
+              memory: 15Mi
+            limits:
+              cpu: 100m
+              memory: 15Mi
+          volumeMounts:
+            - name: go-service
+              mountPath: /config
+      volumes:
+        - name: go-service
+          configMap:
+            name: go-service
