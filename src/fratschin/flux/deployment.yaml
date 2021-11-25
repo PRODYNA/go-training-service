@@ -39,3 +39,10 @@ spec:
             limits:
               cpu: 100m
               memory: 15Mi
+          volumeMounts:
+            - name: go-service
+              mountPath: /config
+      volumes:
+        - name: go-service
+          configMap:
+            name: go-service

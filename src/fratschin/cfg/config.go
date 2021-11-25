@@ -15,6 +15,10 @@ type Port struct {
 	Port string `yaml:"port"`
 }
 
+func (p Port) GetPort() string {
+	return ":" + p.Port
+}
+
 func Load() *Config {
 
 	cfg := &Config{}
