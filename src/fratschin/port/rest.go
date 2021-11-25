@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-func HandleRest(router *mux.Router, a adapter.HttpbinAdapter) {
+func HandleRest(router *mux.Router, a adapter.Adapter) {
 
 	router.
 		Methods("GET").

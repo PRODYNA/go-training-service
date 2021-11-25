@@ -20,6 +20,18 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+          startupProbe:
+            httpGet:
+              path: /start
+              port: 8081
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8081
+          livenessProbe:
+            httpGet:
+              path: /live
+              port: 8081
           resources:
             requests:
               cpu: 100m

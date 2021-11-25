@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-type HttpbinAdapter interface {
+type Adapter interface {
 	CallBackend() (*data.User, error)
 }
 
@@ -16,7 +16,7 @@ type AdapterImpl struct {
 	Client *http.Client
 }
 
-func NewAdapter(client *http.Client) HttpbinAdapter {
+func NewAdapter(client *http.Client) Adapter {
 	return &AdapterImpl{
 		Client: client,
 	}
