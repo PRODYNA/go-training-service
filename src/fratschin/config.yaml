@@ -1,0 +1,4 @@
+rest:
+  port: "8080"
+probe:
+  port: "8081"
