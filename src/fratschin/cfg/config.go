@@ -22,7 +22,7 @@ func (p Port) GetPort() string {
 func Load() *Config {
 
 	cfg := &Config{}
-	err := config.NewConfigLoader().LoadConfig(cfg)
+	err := config.NewConfigLoader().File("").LoadConfig(cfg)
 	if err != nil {
 		log.Info().Msg("cannot load config")
 	}
