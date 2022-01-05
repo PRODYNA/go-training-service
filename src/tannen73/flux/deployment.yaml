@@ -19,7 +19,8 @@ spec:
           image: crgotraining.azurecr.io/tannen73:latest
           imagePullPolicy: Always
           ports:
-            - containerPort: 8080
+            - name: c-port
+              containerPort: 8080
           resources:
             requests:
               cpu: 100m
@@ -27,3 +28,9 @@ spec:
             limits:
               cpu: 100m
               memory: 15Mi
+          startupProbe:
+            httpGet:
+              path: /start
+              port: c-port
+            failureThreshold: 30
+            periodSeconds: 10

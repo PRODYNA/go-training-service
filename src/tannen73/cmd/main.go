@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/gorilla/mux"
+	"github.com/prodyna/goprobes/probes"
 	"log"
 	"net/http"
 )
@@ -8,10 +10,37 @@ import (
 type server struct{}
 
 func main() {
-	s := server{}
+	pRouter := mux.NewRouter()
+
+	initProbes(pRouter)
+	initServer(pRouter)
 
 	log.Printf("Starting server")
-	log.Fatal(http.ListenAndServe(":8080", &s))
+	log.Fatal(http.ListenAndServe(":8080", pRouter))
+}
+
+func initProbes(pRouter *mux.Router) {
+	ps := probes.NewProbeService()
+
+	ps.AddStart(func() (string, bool) {
+		return "Started", true
+	})
+
+	ps.AddLive(probes.NewMemoryProbe(1024 * 1024))
+
+	ps.AddReady(func() (string, bool) {
+		return "Ready", true
+	})
+
+	ps.HandleProbes(pRouter)
+}
+
+func initServer(pRouter *mux.Router) {
+	s := server{}
+	pRouter.
+		Methods("GET").
+		Path("/").
+		Handler(s)
 }
 
 func (s server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
